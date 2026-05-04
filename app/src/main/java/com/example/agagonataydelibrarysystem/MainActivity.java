@@ -82,22 +82,23 @@ public class MainActivity extends AppCompatActivity {
             displayMessage("Error!", "Please fill out all fields");
             return false;
         }
-        if (isTitleAllowed(title)) {
+        if (!isTitleAllowed(title)) {
             displayMessage("Error", "Special characters like?, :, \", <, >, \\, /, |, and * are not allowed.");
             return false;
         }
         String isbnPattern = "^(\\d{10}|\\d{13})$";
         if (title.length() < 2) {
-            displayMessage("Validation Error", "Title is too short.");
+            displayMessage("Input Error", "Title is too short.");
             return false;
         }
 
         if (author.length() > 50) {
-            displayMessage("Validation Error", "Author name is too long (max 50 chars).");
+            displayMessage("Input Error", "Author name is too long (max 50 chars).");
             return false;
         }
-        if (!isbn.matches(isbnPattern)) {
-            displayMessage("Validation Error", "ISBN must be 10 or 13 digits.");
+
+        if (isbn.matches(isbnPattern)) {
+            displayMessage("Input Error", "ISBN must be 10 or 13 digits.");
             return false;
         }
 
