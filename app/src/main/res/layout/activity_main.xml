@@ -5,83 +5,143 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#E3F2FD">
 
     <TextView
         android:id="@+id/tvView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NIGGGERRRRR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Library System"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:background="#64B5F6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/etBookDetail"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:ems="15"
         android:inputType="text"
-        android:text="Name"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="122dp" />
+        android:hint="Enter Book Details"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#BBDEFB"
+        app:layout_constraintTop_toBottomOf="@id/tvView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="#0D47A1"/>
 
     <EditText
         android:id="@+id/etBookID"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:ems="15"
         android:inputType="number"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="186dp" />
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DELETE"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="470dp" />
-
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADD"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="468dp" />
-
-    <Button
-        android:id="@+id/btnView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VIEW"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="470dp" />
-
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UPDATE"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="539dp" />
-
-    <Button
-        android:id="@+id/btnClear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CLEAR"
-        tools:layout_editor_absoluteX="193dp"
-        tools:layout_editor_absoluteY="539dp" />
+        android:hint="Enter Book ID"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#BBDEFB"
+        app:layout_constraintTop_toBottomOf="@id/etBookDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="#0D47A1"/>
 
     <ListView
-        android:layout_width="409dp"
-        android:layout_height="235dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="232dp" />
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#e6ebf2"
+        app:layout_constraintTop_toBottomOf="@id/etBookID"
+        app:layout_constraintBottom_toTopOf="@id/buttonLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#BBDEFB"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ADD"
+                android:backgroundTint="#64B5F6"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/btnView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="VIEW"
+                android:backgroundTint="#42A5F5"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="UPDATE"
+                android:backgroundTint="#90CAF9"
+                android:textColor="#0D47A1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DELETE"
+                android:backgroundTint="#64B5F6"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLEAR"
+                android:backgroundTint="#90CAF9"
+                android:textColor="#0D47A1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
