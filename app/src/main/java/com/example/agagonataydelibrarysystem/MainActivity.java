@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         viewBooks();
         deleteBookRecord();
         updateBookRecord();
+        clearRecordOperation();
     }
     public void init(){
 
@@ -75,6 +76,39 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         bookID.setEnabled(false);
         bookList.setAdapter(adapter);
+        bookList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
+
+                String selectedItem = arrayList.get(position);
+
+                String[] lines = selectedItem.split("\n");
+                String idValue = lines[0].replace("ID: ", "").trim();
+                String titleValue = lines[1].replace("Title: ", "").trim();
+                String authorValue = lines[2].replace("Author: ", "").trim();
+                String currentBookISBN = lines[3].replace("ISBN: ", "").trim();
+
+                bookID.setText(idValue);
+                bookTitle.setText(titleValue);
+                bookAuthor.setText(authorValue);
+                bookISBN.setText(currentBookISBN);
+
+                bookID.setEnabled(true);
+                displayMessage("Record Selected", "You can now Edit or Delete Book ID: " + idValue);
+            }
+        });
+    }
+    public void clearRecordOperation() {
+        clearBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearInputs();
+                bookID.setText("");
+                bookID.setEnabled(false);
+                updateBook.setText("UPDATE");
+                displayMessage("Cleared", "Input fields have been reset.");
+            }
+        });
     }
 
     public boolean validateInputs(String title, String author, String isbn){
@@ -97,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-        if (isbn.matches(isbnPattern)) {
+        if (!isbn.matches(isbnPattern)) {
             displayMessage("Input Error", "ISBN must be 10 or 13 digits.");
             return false;
         }
@@ -114,10 +148,12 @@ public class MainActivity extends AppCompatActivity {
         cursor = db.rawQuery("SELECT * FROM tbl_books", null);
         arrayList.clear();
         while (cursor.moveToNext()) {
-            // Index 0: ID, Index 1: Title, Index 2: Author
-            arrayList.add("ID: " + cursor.getString(0) + "\nTitle: " + cursor.getString(1) + "\nAuthor: " + cursor.getString(2));
+            arrayList.add("ID: " + cursor.getString(0) +
+                    "\nTitle: " + cursor.getString(1) +
+                    "\nAuthor: " + cursor.getString(2) +
+                    "\nISBN: " + cursor.getString(3));
         }
-        adapter.notifyDataSetChanged(); // Updates the UI
+        adapter.notifyDataSetChanged();
     }
     public boolean isTitleAllowed(String title) {
         String illegalCharacters = "[?:\"<>\\\\/|*]";
@@ -153,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         bookTitle.setText("");
         bookAuthor.setText("");
         bookISBN.setText("");
+        bookID.setText("");
         bookTitle.requestFocus();
     }
 
@@ -230,7 +267,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 2. Check if the ID exists in the database
                 cursor = db.rawQuery("SELECT * FROM tbl_books WHERE book_id =" + Integer.parseInt(id), null);
 
                 if (cursor.moveToFirst()){
